@@ -4,73 +4,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eagle X Team</title>
+    <title>Eagle X Study Portal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <img src="EagleX.jpeg" alt="Eagle X Logo" class="logo">
 
-    <h1>Welcome to Eagle X</h1>
-    <p>I am learning how to be a web developer!</p>
-    <h1>Welcome to EagleX</h1>
-    <p>I am learning...</p>
+    <nav class="navbar">
+        <div class="logo-text">Student<span>Portal</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#study-modules">Study Modules</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-    <script>
-        function sayHello() {
-            alert("Welcome to the Eagle X Team!");
-        }
-        function filterStudy() {
-    let input = document.getElementById('studySearch').value.toLowerCase();
-    let cards = document.getElementsByClassName('product-study');
+    <header style="text-align: center; padding: 20px;">
+        <img src="EagleX.jpeg" alt="Eagle X Logo" class="logo">
+        <h1>Welcome to Eagle X</h1>
+        <p>Advanced MCA Study Resource</p>
+    </header>
 
-    for (let i = 0; i < cards.length; i++) {
-        let title = cards[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
-        if (title.includes(input)) {
-            cards[i].style.display = "";
-        } else {
-            cards[i].style.display = "none";
-        }
-    }
-}
-<nav class="navbar">
-    <div class="logo-text">Student<span>Portal</span></div>
-    <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#study-section">Study Modules</a></li>
-        <li><a href="#about">About Project</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</nav>
-    
-    </script>
-    <section class="product-study">
-    <div class="container">
-        <div class="product-visual">
-            <img src="EagleX.jpeg" alt="Hardware Component Diagram">
-            <p class="caption">Figure 1.1: The EagleX Architecture</p>
+    <div class="search-container">
+        <input type="text" id="studySearch" placeholder="Search modules..." onkeyup="filterStudy()">
+    </div>
+
+    <section id="study-modules" class="module-grid">
+        <div class="module-card">
+            <div class="icon">💻</div>
+            <h3>Hardware Logic</h3>
+            <p>Study processors and architecture.</p>
+            <a href="#eagle-section" class="study-link">Open Module</a>
         </div>
+        </section>
 
-        <div class="product-info">
-            <span class="category">MCA Module: Hardware</span>
-            <h2>Advanced Processor Logic</h2>
-            <hr>
-            <div class="spec-grid">
-                <div class="spec-item"><strong>Speed:</strong> 5.2 GHz</div>
-                <div class="spec-item"><strong>Cores:</strong> 16-Core</div>
-                <div class="spec-item"><strong>Memory:</strong> 32GB L3 Cache</div>
+    <section id="eagle-section" class="product-study">
+        <div class="container">
+            <div class="product-visual" style="position: relative;">
+                <img src="EagleX.jpeg" alt="Hardware Component Diagram">
+                <button class="hotspot" style="top: 20%; left: 50%;" onclick="showInfo('Wings', 'Represents Parallel Processing.')">1</button>
+                <button class="hotspot" style="top: 45%; left: 50%;" onclick="showInfo('Core', 'The CPU Core for logic execution.')">2</button>
             </div>
-            <h3>Detailed Explanation:</h3>
-            <p>Students should note that this component uses <strong>parallel processing</strong>. This means it can handle multiple ADBMS queries simultaneously without lagging.</p>
+
+            <div class="product-info">
+                <span class="category">MCA Module: Hardware</span>
+                <h2>Advanced Processor Logic</h2>
+                <hr>
+                <div class="spec-grid">
+                    <div class="spec-item"><strong>Speed:</strong> 5.2 GHz</div>
+                    <div class="spec-item"><strong>Cores:</strong> 16-Core</div>
+                    <div class="spec-item"><strong>Memory:</strong> 32GB L3 Cache</div>
+                </div>
+                <p>This component uses <strong>parallel processing</strong> for ADBMS efficiency.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2>Get In Touch</h2>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </section>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Eagle X Study Portal | Designed by Annal Mohammed J</p>
+    </footer>
+
+    <button onclick="topFunction()" id="backToTop" title="Go to top">↑</button>
+
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()" style="cursor:pointer; float:right;">&times;</span>
+            <h3 id="modalTitle"></h3>
+            <p id="modalBody"></p>
         </div>
     </div>
-    <div class="search-container">
-    <input type="text" id="studySearch" placeholder="Search product (e.g. EagleX, RAM, CPU)..." onkeyup="filterStudy()">
-</div>
-<footer class="main-footer">
-    <p>&copy; 2026 Eagle X Study Portal | Designed by Annal Mohammed J</p>
-</footer>
-</section>
 
+    <script>
+        function filterStudy() {
+            let input = document.getElementById('studySearch').value.toLowerCase();
+            let cards = document.getElementsByClassName('module-card');
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getElementsByTagName('h2')[0] || cards[i].getElementsByTagName('h3')[0];
+                cards[i].style.display = title.innerText.toLowerCase().includes(input) ? "" : "none";
+            }
+        }
 
+        function topFunction() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function showInfo(title, text) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalBody').innerText = text;
+            document.getElementById('infoModal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('infoModal').style.display = "none";
+        }
+    </script>
 </body>
 </html>
