@@ -19,6 +19,29 @@
         function sayHello() {
             alert("Welcome to the Eagle X Team!");
         }
+        function filterStudy() {
+    let input = document.getElementById('studySearch').value.toLowerCase();
+    let cards = document.getElementsByClassName('product-study');
+
+    for (let i = 0; i < cards.length; i++) {
+        let title = cards[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
+        if (title.includes(input)) {
+            cards[i].style.display = "";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+}
+<nav class="navbar">
+    <div class="logo-text">Student<span>Portal</span></div>
+    <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#study-section">Study Modules</a></li>
+        <li><a href="#about">About Project</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+    
     </script>
     <section class="product-study">
     <div class="container">
@@ -40,7 +63,14 @@
             <p>Students should note that this component uses <strong>parallel processing</strong>. This means it can handle multiple ADBMS queries simultaneously without lagging.</p>
         </div>
     </div>
+    <div class="search-container">
+    <input type="text" id="studySearch" placeholder="Search product (e.g. EagleX, RAM, CPU)..." onkeyup="filterStudy()">
+</div>
+<footer class="main-footer">
+    <p>&copy; 2026 Eagle X Study Portal | Designed by Annal Mohammed J</p>
+</footer>
 </section>
+
 
 </body>
 </html>
