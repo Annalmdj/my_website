@@ -1,26 +1,5 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eagle X Team</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <img src="EagleX.jpeg" alt="Eagle X Logo" class="logo">
-
-    <h1>Welcome to Eagle X</h1>
-    <p>I am learning how to be a web developer!</p>
-    <h1>Welcome to EagleX</h1>
-    <p>I am learning...</p>
-
-    <script>
-        function sayHello() {
-            alert("Welcome to the Eagle X Team!");
-        }
-    </script>
-    <section class="product-study">
+<section class="product-study">
     <div class="container">
         <div class="product-visual">
             <img src="EagleX.jpeg" alt="Hardware Component Diagram">
@@ -41,6 +20,3 @@
         </div>
     </div>
 </section>
-
-</body>
-</html>
