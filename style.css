@@ -1,4 +1,4 @@
-
+/* --- GLOBAL STYLES --- */
 body {
     background-color: #1a1a1a;
     color: #e0e0e0;
@@ -7,129 +7,56 @@ body {
     text-align: center;
 }
 
-.logo { width: 220px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3); }
+.logo { 
+    width: 220px; 
+    border-radius: 20px; 
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3); 
+}
 
+/* --- NAVIGATION --- */
 .navbar {
     display: flex; justify-content: space-between; align-items: center;
     padding: 15px 5%; background: #222; position: sticky; top: 0; z-index: 100;
 }
 .nav-links { display: flex; list-style: none; gap: 20px; }
-.nav-links a { color: white; text-decoration: none; }
+.nav-links a { color: white; text-decoration: none; transition: 0.3s; }
+.nav-links a:hover { color: #00d4ff; }
 
+/* --- MODULE GRID --- */
+.module-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; padding: 20px; }
+.module-card { 
+    background: #222; padding: 25px; border-radius: 15px; width: 250px; 
+    border: 1px solid #333; transition: 0.3s; 
+}
+.module-card:hover { border-color: #00d4ff; transform: translateY(-5px); }
+
+/* --- STUDY SECTIONS & SCANNER --- */
 .product-study {
     background: #111; padding: 40px; margin: 20px auto;
     max-width: 900px; border-radius: 20px; border: 1px solid #00d4ff;
 }
 .container { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: center; }
 
-.spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-.spec-item { background: #222; padding: 10px; border-left: 4px solid #00d4ff; text-align: left; }
-
-.module-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; padding: 20px; }
-.module-card { background: #222; padding: 25px; border-radius: 15px; width: 250px; border: 1px solid #333; }
-
-#backToTop {
-    position: fixed; bottom: 20px; right: 20px; background: #00d4ff;
-    border: none; padding: 15px; border-radius: 50%; cursor: pointer; font-weight: bold;
-}
-
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; }
-.modal-content { background: #222; margin: 15% auto; padding: 30px; width: 300px; border-radius: 15px; border: 1px solid #00d4ff; }
-
-.hotspot { position: absolute; background: #00d4ff; border: none; border-radius: 50%; cursor: pointer; padding: 5px 10px; }
-.db-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background: #222;
-}
-
-.db-table th, .db-table td {
-    border: 1px solid #333;
-    padding: 12px;
-    text-align: left;
-}
-
-.db-table th {
-    background-color: #00d4ff;
-    color: black;
-}
-
-.db-table tr:hover {
-    background-color: #2a2a2a;
-}
-.db-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background: #222;
-}
-
-.db-table th, .db-table td {
-    border: 1px solid #333;
-    padding: 12px;
-    text-align: left;
-}
-
-.db-table th {
-    background-color: #00d4ff;
-    color: black;
-}
-.code-box {
-    background: #000;
-    border: 1px solid #333;
-    border-radius: 8px;
-    margin-top: 20px;
-    text-align: left;
-}
-
-.code-header {
-    background: #333;
-    padding: 10px;
-    font-size: 14px;
-    color: #00d4ff;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-pre {
-    padding: 15px;
-    color: #00ff00; /* Classic "Matrix" green coding color */
-    font-family: 'Courier New', Courier, monospace;
-    overflow-x: auto;
-}
-.code-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #333;
-    padding: 10px 15px;
-    color: #00d4ff;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-.copy-btn {
-    background: #444;
-    color: #00d4ff;
-    border: 1px solid #00d4ff;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
-    transition: 0.3s;
-}
-
-.copy-btn:hover {
-    background: #00d4ff;
-    color: black;
-}
-/* The Scanning Container */
 .product-visual {
     position: relative;
-    overflow: hidden; /* Keeps the scan line inside the image */
+    overflow: hidden;
     border: 2px solid #333;
     transition: 0.5s;
+    cursor: crosshair;
+}
+.reset-btn {
+    background: transparent;
+    color: #ff4444;
+    border: 1px solid #ff4444;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 11px;
+    border-radius: 4px;
+}
+.reset-btn:hover {
+    background: #ff4444;
+    color: white;
 }
 
 .product-visual:hover {
@@ -137,52 +64,61 @@ pre {
     box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
 }
 
-/* The Animated Scan Line */
+/* Scanner Lens and Line */
+.scanner-lens {
+    position: absolute; border: 2px solid #00d4ff; width: 100px; height: 100px;
+    border-radius: 50%; pointer-events: none; z-index: 50;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5); display: none;
+    background: rgba(0, 212, 255, 0.1);
+}
+.product-visual:hover .scanner-lens { display: block; }
+
 .product-visual::after {
-    content: "";
-    position: absolute;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    height: 10px;
-    background: rgba(0, 212, 255, 0.7);
-    box-shadow: 0 0 15px #00d4ff;
-    animation: scan 3s infinite linear;
-    display: none; /* Only shows on hover */
+    content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 10px;
+    background: rgba(0, 212, 255, 0.7); box-shadow: 0 0 15px #00d4ff;
+    animation: scan 3s infinite linear; display: none;
 }
+.product-visual:hover::after { display: block; }
 
-.product-visual:hover::after {
-    display: block;
-}
+@keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
 
-@keyframes scan {
-    0% { top: 0%; }
-    100% { top: 100%; }
-}
+/* --- SCANNER DASHBOARD --- */
 .scanner-dashboard {
-    background: #0a0a0a !important;
-    border: 2px solid #333;
-    padding: 25px;
-    box-shadow: inset 0 0 15px rgba(0, 212, 255, 0.2);
+    background: #0a0a0a !important; border: 2px solid #333;
+    padding: 25px; box-shadow: inset 0 0 15px rgba(0, 212, 255, 0.2);
+}
+.scan-status { color: #00d4ff; font-family: monospace; font-size: 12px; margin-bottom: 10px; }
+.pulse { animation: blink 1s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+.spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+.spec-item { 
+    background: #222; padding: 10px; border-left: 4px solid #00d4ff; 
+    text-align: left; transition: 0.3s; 
 }
 
-.scan-status {
-    color: #00d4ff;
-    font-family: monospace;
-    font-size: 12px;
-    margin-bottom: 10px;
-}
+/* --- DATABASE & CODE TABLES --- */
+.db-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #222; }
+.db-table th, .db-table td { border: 1px solid #333; padding: 12px; text-align: left; }
+.db-table th { background-color: #00d4ff; color: black; }
+.db-table tr:hover { background-color: #2a2a2a; }
 
-.pulse {
-    animation: blink 1s infinite;
+.code-box { background: #000; border: 1px solid #333; border-radius: 8px; margin-top: 20px; text-align: left; }
+.code-header {
+    display: flex; justify-content: space-between; align-items: center;
+    background: #333; padding: 10px 15px; color: #00d4ff;
+    border-top-left-radius: 8px; border-top-right-radius: 8px;
 }
+pre { padding: 15px; color: #00ff00; font-family: 'Courier New', monospace; overflow-x: auto; }
 
-@keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 1; }
+/* --- UI ELEMENTS --- */
+#backToTop {
+    position: fixed; bottom: 20px; right: 20px; background: #00d4ff;
+    border: none; padding: 15px; border-radius: 50%; cursor: pointer; font-weight: bold;
 }
-
-.spec-item {
-    transition: all 0.3s ease;
+.hotspot { position: absolute; background: #00d4ff; border: none; border-radius: 50%; cursor: pointer; padding: 5px 10px; z-index: 60; }
+.copy-btn {
+    background: #444; color: #00d4ff; border: 1px solid #00d4ff;
+    padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;
 }
+.copy-btn:hover { background: #00d4ff; color: black; }

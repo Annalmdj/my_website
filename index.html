@@ -33,30 +33,83 @@
             <div class="icon">💻</div>
             <h3>Hardware Logic</h3>
             <p>Processors & Architecture.</p>
-            <a href="#eagle-section" class="study-link">Open Module</a>
+            <a href="#eagle-section" class="study-link">Open Scanner</a>
         </div>
         <div class="module-card">
             <div class="icon">🗄️</div>
             <h3>Database</h3>
             <p>ADBMS & SQL Queries.</p>
-            <a href="#database-section" class="study-link">Open Module</a>
+            <a href="#database-section" class="study-link">Open Table</a>
         </div>
     </section>
 
     <section id="eagle-section" class="product-study">
         <div class="container">
-            <div class="product-visual" style="position: relative;">
+            <div class="product-visual" id="scanArea" style="position: relative;">
+                <div class="scanner-lens" id="lens"></div>
                 <img src="EagleX.jpeg" alt="Hardware Diagram">
                 <button class="hotspot" style="top: 25%; left: 50%;" onclick="showInfo('Wings', 'Parallel Processing Unit')">1</button>
                 <button class="hotspot" style="top: 45%; left: 50%;" onclick="showInfo('Core', 'Central Logic Engine')">2</button>
+                <button class="hotspot" style="top: 30%; left: 20%;" onclick="showInfo('L3 Cache', '32GB Ultra-fast temporary storage.')">3</button>
+                <button class="hotspot" style="top: 70%; left: 80%;" onclick="showInfo('Bus Speed', 'High-speed data path for CPU.')">4</button>
             </div>
-            <div class="product-info">
-                <h2>Advanced Processor Logic</h2>
-                <div class="spec-grid">
-                    <div class="spec-item"><strong>Speed:</strong> 5.2 GHz</div>
-                    <div class="spec-item"><strong>Cores:</strong> 16-Core</div>
+            
+            <div class="product-info scanner-dashboard">
+                <div class="scan-status">
+                    <span class="pulse">●</span> SYSTEM READY: SCAN ACTIVE
                 </div>
-                <p>This system handles multiple **ADBMS** queries simultaneously.</p>
+                <h2 id="scan-title">Select a component to scan...</h2>
+                <hr>
+                <div id="scan-details" class="spec-grid">
+                    <div class="spec-item">Waiting for input...</div>
+                </div>
+                <p id="scan-description">Hover or click the numbered hotspots to retrieve study material.</p>
+                <button class="submit-btn" style="margin-top: 20px; width: 100%;" onclick="window.print()">
+                    Download Study Report
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="database-section" class="product-study">
+        <div class="container">
+            <div class="product-info">
+                <span class="category">MCA Module: ADBMS</span>
+                <h2>SQL Table Structure</h2>
+                <hr>
+                <table class="db-table">
+                    <thead>
+                        <tr><th>ID</th><th>Name</th><th>Course</th><th>Grade</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>101</td><td>Annal Mohammed</td><td>MCA</td><td>A+</td></tr>
+                        <tr><td>102</td><td>Vetri</td><td>MCA</td><td>A</td></tr>
+                    </tbody>
+                </table>
+                <div class="scan-log" style="margin-top: 20px; border-top: 1px solid #333; padding-top: 15px;">
+    <h4 style="color: #00d4ff; font-size: 14px; margin-bottom: 10px;">RECENT SCANS:</h4>
+    <ul id="history-list" style="text-align: left; font-size: 13px; color: #888; list-style: none; padding: 0; max-height: 100px; overflow-y: auto;">
+        <li>• No components scanned yet...</li>
+    </ul>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="code-library" class="product-study">
+        <div class="product-info">
+            <span class="category">MCA Module: Programming</span>
+            <h2>Essential Code Snippets</h2>
+            <div class="code-box">
+                <div class="code-header">
+                    <span>Python: Check Even/Odd</span>
+                    <button class="copy-btn" onclick="copyCode()">Copy Code</button>
+                </div>
+                <pre><code id="pythonCode">num = int(input("Enter a number: "))
+if (num % 2) == 0:
+    print("Even")
+else:
+    print("Odd")</code></pre>
             </div>
         </div>
     </section>
@@ -70,122 +123,37 @@
             <button type="submit" class="submit-btn">Send</button>
         </form>
     </section>
-    <section id="database-section" class="product-study">
+    <section id="logic-section" class="product-study">
     <div class="container">
-        <div class="product-info">
-            <span class="category">MCA Module: ADBMS</span>
-            <h2>SQL Table Structure</h2>
+        <div class="product-info scanner-dashboard">
+            <span class="category">Hardware Module: Logic Gates</span>
+            <h2>Binary Logic Scanner</h2>
             <hr>
-            <p>Example of a <strong>STUDENT_DETAILS</strong> table used in database queries:</p>
-            
-            <table class="db-table">
-                <thead>
-                    <tr>
-                        <th>Student_ID</th>
-                        <th>Name</th>
-                        <th>Course</th>
-                        <th>Grade</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>101</td>
-                        <td>Annal Mohammed</td>
-                        <td>MCA</td>
-                        <td>A+</td>
-                    </tr>
-                    <tr>
-                        <td>102</td>
-                        <td>Vetri</td>
-                        <td>MCA</td>
-                        <td>A</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="logic-display" class="spec-grid">
+                <div class="spec-item"><strong>Gate Type:</strong> AND Gate</div>
+                <div class="spec-item"><strong>Output:</strong> 0 (Low)</div>
+            </div>
+            <p>Scanning the circuit reveals the underlying Boolean algebra used in the Eagle X processor.</p>
+            <div style="display: flex; gap: 10px;">
+                <button class="copy-btn" onclick="updateLogic('AND', 'Output is 1 only if both inputs are 1.')">Scan AND</button>
+                <button class="copy-btn" onclick="updateLogic('OR', 'Output is 1 if at least one input is 1.')">Scan OR</button>
+            </div>
         </div>
     </div>
 </section>
-<section id="database-section" class="product-study">
-    <div class="container">
-        <div class="product-info">
-            <span class="category">MCA Module: ADBMS</span>
-            <h2>SQL Table Structure</h2>
-            <hr>
-            <p>Study the <strong>STUDENT_DETAILS</strong> table for your ADBMS queries:</p>
-            
-            <table class="db-table">
-                <thead>
-                    <tr>
-                        <th>Student_ID</th>
-                        <th>Name</th>
-                        <th>Course</th>
-                        <th>Grade</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>101</td>
-                        <td>Annal Mohammed</td>
-                        <td>MCA</td>
-                        <td>A+</td>
-                    </tr>
-                    <tr>
-                        <td>102</td>
-                        <td>Vetri</td>
-                        <td>MCA</td>
-                        <td>A</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
-<section id="code-library" class="product-study">
-    <div class="product-info">
-        <span class="category">MCA Module: Programming</span>
-        <h2>Essential Code Snippets</h2>
-        <hr>
-        <p>Commonly used logic for <strong>C</strong> and <strong>Python</strong>:</p>
-        
-        <div class="code-box">
-            <div class="code-header">Python: Check Even/Odd</div>
-            <pre><code>num = int(input("Enter a number: "))
-if (num % 2) == 0:
-    print("Even")
-else:
-    print("Odd")</code></pre>
-        </div>
-    </div>
-</section>
-<div class="code-box">
-    <div class="code-header">
-        <span>Python: Check Even/Odd</span>
-        <button class="copy-btn" onclick="copyCode()">Copy Code</button>
-    </div>
-    <pre><code id="pythonCode">num = int(input("Enter a number: "))
-if (num % 2) == 0:
-    print("Even")
-else:
-    print("Odd")</code></pre>
-</div>
 
     <footer class="main-footer">
         <p>&copy; 2026 Eagle X | Designed by Annal Mohammed J</p>
     </footer>
 
     <button onclick="topFunction()" id="backToTop">↑</button>
-
-    <div id="infoModal" class="modal">
-        <div class="modal-content">
-            <span onclick="closeModal()" style="float:right; cursor:pointer;">&times;</span>
-            <h3 id="modalTitle"></h3>
-            <p id="modalBody"></p>
-        </div>
-        <button class="hotspot" style="top: 30%; left: 20%;" onclick="showInfo('L3 Cache', '32GB Ultra-fast temporary storage for processing.')">3</button>
-<button class="hotspot" style="top: 70%; left: 80%;" onclick="showInfo('Bus Speed', 'High-speed data path connecting the CPU to RAM.')">4</button>
-    </div>
+    <button id="btn1" class="hotspot" style="top: 25%; left: 50%;" onclick="showInfo('Wings', 'Parallel Processing Unit', 'btn1')">1</button>
+<button id="btn2" class="hotspot" style="top: 45%; left: 50%;" onclick="showInfo('Core', 'Central Logic Engine', 'btn2')">2</button>
+<button id="btn3" class="hotspot" style="top: 30%; left: 20%;" onclick="showInfo('L3 Cache', '32GB Ultra-fast storage.', 'btn3')">3</button>
+<button id="btn4" class="hotspot" style="top: 70%; left: 80%;" onclick="showInfo('Bus Speed', 'Data path for CPU.', 'btn4')">4</button>
 
     <script>
+        // 1. Search Filter
         function filterStudy() {
             let input = document.getElementById('studySearch').value.toLowerCase();
             let cards = document.getElementsByClassName('module-card');
@@ -194,30 +162,106 @@ else:
                 cards[i].style.display = txt.includes(input) ? "" : "none";
             }
         }
+
+        // 2. Back to Top
         function topFunction() { window.scrollTo({top: 0, behavior: 'smooth'}); }
-        function showInfo(t, s) {
-            document.getElementById('modalTitle').innerText = t;
-            document.getElementById('modalBody').innerText = s;
-            document.getElementById('infoModal').style.display = "block";
+
+        // 3. Scanner Logic
+        function showInfo(title, text) {
+            document.getElementById('scan-title').innerText = title;
+            document.getElementById('scan-description').innerText = text;
+            let details = document.getElementById('scan-details');
+            details.innerHTML = `<div class="spec-item" style="border-color: #00ff00;">SCANNING...</div>`;
+            setTimeout(() => {
+                details.innerHTML = `<div class="spec-item"><strong>Status:</strong> Verified</div>
+                                     <div class="spec-item"><strong>Source:</strong> EagleX Core</div>`;
+            }, 500);
         }
-        function closeModal() { document.getElementById('infoModal').style.display = "none"; }
-        function copyCode() {
-    let codeText = document.getElementById("pythonCode").innerText;
-    navigator.clipboard.writeText(codeText).then(() => {
-        alert("Code copied to clipboard!");
-    });
-}
-function showInfo(title, text) {
-    // Update the Modal or a side-panel with the "Scanned" data
-    const modal = document.getElementById('infoModal');
-    document.getElementById('modalTitle').innerHTML = `<span style="color:#00d4ff;">[SCAN COMPLETE]</span> ${title}`;
-    document.getElementById('modalBody').innerText = text;
+        function showInfo(title, text) {
+    // 1. Update the Main Display
+    document.getElementById('scan-title').innerText = title;
+    document.getElementById('scan-description').innerText = text;
     
-    // Add a sound effect feel (optional visual flash)
-    modal.style.display = "block";
-    modal.classList.add("scan-flash");
+    // 2. Add this specific scan to the History List
+    const list = document.getElementById('history-list');
+    if (list.innerHTML.includes("No components scanned")) {
+        list.innerHTML = ""; // Remove the placeholder text
+    }
+    
+    const newItem = document.createElement('li');
+    newItem.style.marginBottom = "5px";
+    newItem.innerHTML = `• <span style="color:#00d4ff;">${title}</span> - Analyzed`;
+    list.prepend(newItem); // This puts the newest scan at the very top
+    
+    // 3. Visual Feedback
+    let details = document.getElementById('scan-details');
+    details.innerHTML = `<div class="spec-item" style="border-color: #00ff00;">ANALYZING...</div>`;
+    
+    setTimeout(() => {
+        details.innerHTML = `<div class="spec-item"><strong>Component:</strong> ${title}</div>
+                             <div class="spec-item"><strong>Result:</strong> Verified</div>`;
+    }, 400);
+}
+function showInfo(title, text, btnId) {
+    // 1. Update Display
+    document.getElementById('scan-title').innerText = title;
+    document.getElementById('scan-description').innerText = text;
+    
+    // 2. Change button color to show "Scanned" status
+    if(btnId) {
+        document.getElementById(btnId).style.background = "#00ff00";
+        document.getElementById(btnId).style.boxShadow = "0 0 15px #00ff00";
+    }
+
+    // 3. Add to History
+    const list = document.getElementById('history-list');
+    if (list.innerHTML.includes("No components scanned")) list.innerHTML = "";
+    
+    const newItem = document.createElement('li');
+    newItem.innerHTML = `• <span style="color:#00ff00;">[COMPLETE]</span> ${title}`;
+    list.prepend(newItem);
+
+    // 4. Analysis Animation
+    let details = document.getElementById('scan-details');
+    details.innerHTML = `<div class="spec-item" style="border-color: #00ff00;">SCANNING...</div>`;
+    setTimeout(() => {
+        details.innerHTML = `<div class="spec-item"><strong>Topic:</strong> ${title}</div>
+                             <div class="spec-item"><strong>Status:</strong> Scanned</div>`;
+    }, 400);
+}
+function updateLogic(gate, desc) {
+    document.getElementById('logic-display').innerHTML = `
+        <div class="spec-item" style="border-color: #00ff00;"><strong>Gate:</strong> ${gate}</div>
+        <div class="spec-item"><strong>Status:</strong> Active</div>
+    `;
+    // Also add this to your main Scan History
+    showInfo(gate + " Gate Logic", desc);
 }
 
+        // 4. Scanner Lens Movement
+        const scanArea = document.getElementById('scanArea');
+        const lens = document.getElementById('lens');
+        scanArea.addEventListener('mousemove', (e) => {
+            const rect = scanArea.getBoundingClientRect();
+            const x = e.clientX - rect.left - 50;
+            const y = e.clientY - rect.top - 50;
+            lens.style.left = x + 'px';
+            lens.style.top = y + 'px';
+        });
+
+        // 5. Copy Code Logic
+        function copyCode() {
+            let codeText = document.getElementById("pythonCode").innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                alert("Code copied to clipboard!");
+            });
+        }
+        <div class="module-card">
+    <div class="icon">🔌</div>
+    <h3>Logic Gates</h3>
+    <p>AND, OR, NOT Circuits.</p>
+    <a href="#logic-section" class="study-link">Scan Circuit</a>
+</div>
     </script>
 </body>
 </html>
