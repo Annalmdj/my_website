@@ -39,7 +39,7 @@
             <div class="icon">🗄️</div>
             <h3>Database</h3>
             <p>ADBMS & SQL Queries.</p>
-            <a href="#" class="study-link">Soon</a>
+            <a href="#database-section" class="study-link">Open Module</a>
         </div>
     </section>
 
@@ -70,6 +70,104 @@
             <button type="submit" class="submit-btn">Send</button>
         </form>
     </section>
+    <section id="database-section" class="product-study">
+    <div class="container">
+        <div class="product-info">
+            <span class="category">MCA Module: ADBMS</span>
+            <h2>SQL Table Structure</h2>
+            <hr>
+            <p>Example of a <strong>STUDENT_DETAILS</strong> table used in database queries:</p>
+            
+            <table class="db-table">
+                <thead>
+                    <tr>
+                        <th>Student_ID</th>
+                        <th>Name</th>
+                        <th>Course</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>101</td>
+                        <td>Annal Mohammed</td>
+                        <td>MCA</td>
+                        <td>A+</td>
+                    </tr>
+                    <tr>
+                        <td>102</td>
+                        <td>Vetri</td>
+                        <td>MCA</td>
+                        <td>A</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<section id="database-section" class="product-study">
+    <div class="container">
+        <div class="product-info">
+            <span class="category">MCA Module: ADBMS</span>
+            <h2>SQL Table Structure</h2>
+            <hr>
+            <p>Study the <strong>STUDENT_DETAILS</strong> table for your ADBMS queries:</p>
+            
+            <table class="db-table">
+                <thead>
+                    <tr>
+                        <th>Student_ID</th>
+                        <th>Name</th>
+                        <th>Course</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>101</td>
+                        <td>Annal Mohammed</td>
+                        <td>MCA</td>
+                        <td>A+</td>
+                    </tr>
+                    <tr>
+                        <td>102</td>
+                        <td>Vetri</td>
+                        <td>MCA</td>
+                        <td>A</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<section id="code-library" class="product-study">
+    <div class="product-info">
+        <span class="category">MCA Module: Programming</span>
+        <h2>Essential Code Snippets</h2>
+        <hr>
+        <p>Commonly used logic for <strong>C</strong> and <strong>Python</strong>:</p>
+        
+        <div class="code-box">
+            <div class="code-header">Python: Check Even/Odd</div>
+            <pre><code>num = int(input("Enter a number: "))
+if (num % 2) == 0:
+    print("Even")
+else:
+    print("Odd")</code></pre>
+        </div>
+    </div>
+</section>
+<div class="code-box">
+    <div class="code-header">
+        <span>Python: Check Even/Odd</span>
+        <button class="copy-btn" onclick="copyCode()">Copy Code</button>
+    </div>
+    <pre><code id="pythonCode">num = int(input("Enter a number: "))
+if (num % 2) == 0:
+    print("Even")
+else:
+    print("Odd")</code></pre>
+</div>
 
     <footer class="main-footer">
         <p>&copy; 2026 Eagle X | Designed by Annal Mohammed J</p>
@@ -83,6 +181,8 @@
             <h3 id="modalTitle"></h3>
             <p id="modalBody"></p>
         </div>
+        <button class="hotspot" style="top: 30%; left: 20%;" onclick="showInfo('L3 Cache', '32GB Ultra-fast temporary storage for processing.')">3</button>
+<button class="hotspot" style="top: 70%; left: 80%;" onclick="showInfo('Bus Speed', 'High-speed data path connecting the CPU to RAM.')">4</button>
     </div>
 
     <script>
@@ -101,6 +201,23 @@
             document.getElementById('infoModal').style.display = "block";
         }
         function closeModal() { document.getElementById('infoModal').style.display = "none"; }
+        function copyCode() {
+    let codeText = document.getElementById("pythonCode").innerText;
+    navigator.clipboard.writeText(codeText).then(() => {
+        alert("Code copied to clipboard!");
+    });
+}
+function showInfo(title, text) {
+    // Update the Modal or a side-panel with the "Scanned" data
+    const modal = document.getElementById('infoModal');
+    document.getElementById('modalTitle').innerHTML = `<span style="color:#00d4ff;">[SCAN COMPLETE]</span> ${title}`;
+    document.getElementById('modalBody').innerText = text;
+    
+    // Add a sound effect feel (optional visual flash)
+    modal.style.display = "block";
+    modal.classList.add("scan-flash");
+}
+
     </script>
 </body>
 </html>
