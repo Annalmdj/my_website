@@ -3,163 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eagle X Study Portal</title>
+    <title>Eagle X | Waste AI Portal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div id="devModal" class="modal">
         <div class="modal-content">
-            <h2 style="color: #00d4ff;">Developer Profile</h2>
-            <p><strong>Name:</strong> Annal Mohammed J</p>
-            <p><strong>Course:</strong> MCA Graduate</p>
+            <h2 style="color: #00d4ff;">Eagle X Portal</h2>
+            <p><strong>Developer:</strong> Annal Mohammed J</p>
+            <p><strong>Project:</strong> Waste AI Study</p>
             <hr style="border: 0.5px solid #333; margin: 15px 0;">
-            <button onclick="closeDevModal()" class="submit-btn" style="width: 100%;">Enter Portal</button>
+            <button onclick="document.getElementById('devModal').style.display='none'" class="btn-action">Start Study</button>
         </div>
     </div>
 
     <nav class="navbar">
-        <div style="font-size: 24px; font-weight: bold; color: #00d4ff;">EagleX<span>Portal</span></div>
+        <div style="font-size: 22px; font-weight: bold; color: #00d4ff;">Student<span>Portal</span></div>
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
-            <li><a href="#study-modules">Modules</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#waste-module">Waste AI</a></li>
+            <li><a href="#">Contact</a></li>
         </ul>
     </nav>
 
     <header>
         <img src="EagleX.jpeg" alt="Logo" class="logo">
-        <h1>Eagle X Team</h1>
-        <p>Advanced MCA Learning Resource</p>
+        <h1>Eagle X: Visual AI</h1>
+        <p>Step-by-Step Waste Classification Study</p>
     </header>
 
-    <section id="study-modules" class="module-grid">
-        <div class="module-card" onclick="location.href='#eagle-section'">
-            <div class="icon">💻</div>
-            <h3>Hardware</h3>
-            <p>Eagle X Architecture</p>
-        </div>
-        <div class="module-card" onclick="location.href='#logic-section'">
-            <div class="icon">🔌</div>
-            <h3>Logic Gates</h3>
-            <p>AND/OR Circuit Logic</p>
-        </div>
-        <div class="module-card" onclick="location.href='#database-section'">
-            <div class="icon">🗄️</div>
-            <h3>Database</h3>
-            <p>ADBMS SQL Tables</p>
-        </div>
-        <div class="module-card" onclick="location.href='#ai-module'">
-            <div class="icon">👁️</div>
-            <h3>Visual AI</h3>
-            <p>Google Lens Analysis</p>
-        </div>
-    </section>
-
-    <section id="eagle-section" class="product-study">
+    <section id="waste-module" class="product-study">
         <div class="container">
-            <div class="product-visual" id="scanArea">
-                <div class="scanner-lens" id="lens"></div>
-                <img src="Apple Fruit.jpeg" alt="Hardware" style="width: 100%; display: block;">
-                <button id="btn1" class="hotspot" style="top:25%; left:50%;" onclick="showInfo('Wings', 'Parallel Processing Unit', 'btn1')">1</button>
-                <button id="btn2" class="hotspot" style="top:45%; left:50%;" onclick="showInfo('Core', 'Central Logic Engine', 'btn2')">2</button>
+            <div class="product-visual">
+                <img src="https://via.placeholder.com/350x250?text=Upload+Image" id="scanPreview" alt="Scanner Area">
+                <input type="file" id="fileInput" onchange="processImage(event)" hidden>
+                <button class="btn-action" style="position:absolute; bottom:10px; left:10%; width:80%;" onclick="document.getElementById('fileInput').click()">
+                    STEP 1: UPLOAD IMAGE
+                </button>
             </div>
+
             <div class="scanner-dashboard">
-                <h2 id="scan-title">Ready to Scan...</h2>
-                <p id="scan-description">Hover over the hardware to begin analysis.</p>
-                <div id="scan-details" class="spec-grid">
-                    <div class="spec-item">Status: Waiting...</div>
+                <span style="color:#00d4ff; font-size:11px; font-weight:bold;">AI ANALYSIS ENGINE</span>
+                <h2 id="step2-title">Identification Ready</h2>
+                <hr style="border:0.5px solid #333;">
+                
+                <div id="result-area" style="display:none;">
+                    <p id="step2-desc" style="font-size:13px; color:#bbb;"></p>
+                    
+                    <h4 style="color:#00ff00; margin-bottom:5px;">Step 3: Pros & Cons</h4>
+                    <div class="spec-grid">
+                        <div class="spec-item" id="pro-text" style="border-color:#00ff00;"></div>
+                        <div class="spec-item" id="con-text" style="border-color:#ff4444;"></div>
+                    </div>
+
+                    <h4 style="color:#00d4ff; margin-bottom:5px;">Step 4: Classification</h4>
+                    <div class="spec-item" id="step4-status" style="font-weight:bold; text-align:center;"></div>
                 </div>
-                <div style="margin-top: 20px; border-top: 1px solid #333; padding-top: 10px;">
-                    <h4 style="color: #00d4ff;">RECENT HISTORY:</h4>
-                    <ul id="history-list" style="font-size: 12px; color: #888; list-style: none; padding: 0;"></ul>
+
+                <div id="waiting-msg" style="color:#666; font-style:italic; margin-top:20px;">
+                    Please upload an image (Apple, Plastic, etc.) to begin Step 2.
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="database-section" class="product-study">
-        <h3>MCA Module: ADBMS</h3>
-        <table class="db-table">
-            <thead>
-                <tr><th>ID</th><th>Name</th><th>Course</th><th>Grade</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>101</td><td>Annal Mohammed</td><td>MCA</td><td>A+</td></tr>
-                <tr><td>102</td><td>Vetri</td><td>MCA</td><td>A</td></tr>
-            </tbody>
-        </table>
-    </section>
-
-    <section id="ai-module" class="product-study">
-        <span style="color: #00d4ff; font-size: 12px; font-weight: bold;">OBJECT RECOGNITION (GOOGLE LENS)</span>
-        <h2>AI Identification Model</h2>
-        <div class="spec-grid">
-            <div class="spec-item" style="border-left-color: #00ff00;">
-                <strong style="color: #00ff00;">ADVANTAGES:</strong><br>
-                Instant IDs (Apple, TV), OCR for code, SQL connectivity.
-            </div>
-            <div class="spec-item" style="border-left-color: #ff4444;">
-                <strong style="color: #ff4444;">DISADVANTAGES:</strong><br>
-                High battery usage, privacy risks, needs Cloud.
-            </div>
-        </div>
-        <button class="submit-btn" onclick="simulateAIScan()">Run AI Simulation</button>
-        <p id="ai-status" style="font-family: monospace; font-size: 12px; color: #00d4ff; margin-top: 10px;"></p>
-    </section>
-
-    <footer style="padding: 40px 0; color: #666; font-size: 14px;">
+    <footer style="margin: 50px 0; font-size: 12px; color: #555;">
         <p>&copy; 2026 Eagle X | Designed by Annal Mohammed J</p>
     </footer>
 
     <script>
-        // Modal Control
-        window.onload = () => { document.getElementById('devModal').style.display = "flex"; };
-        function closeDevModal() { document.getElementById('devModal').style.display = "none"; }
-
-        // Core Scanner Logic
-        function showInfo(title, text, btnId) {
-            document.getElementById('scan-title').innerText = title;
-            document.getElementById('scan-description').innerText = text;
-            
-            if(btnId) {
-                document.getElementById(btnId).style.background = "#00ff00";
-                document.getElementById(btnId).style.boxShadow = "0 0 15px #00ff00";
+        // Database of objects for study
+        const studyData = {
+            "apple": {
+                name: "Organic Waste (Apple)",
+                desc: "Natural matter derived from fruits. Contains moisture and fiber.",
+                pro: "Completely natural; can be composted into fertilizer.",
+                con: "Decays quickly; can attract pests if left open.",
+                type: "BIODEGRADABLE"
+            },
+            "plastic": {
+                name: "Synthetic Waste (Plastic)",
+                desc: "Man-made polymer used in packaging and bottles.",
+                pro: "Highly durable, waterproof, and very cheap to make.",
+                con: "Does not decay; creates microplastic pollution.",
+                type: "NON-BIODEGRADABLE"
             }
-
-            const list = document.getElementById('history-list');
-            const item = document.createElement('li');
-            item.innerHTML = `• <span style="color:#00ff00;">[VERIFIED]</span> ${title}`;
-            list.prepend(item);
-
-            let details = document.getElementById('scan-details');
-            details.innerHTML = `<div class="spec-item" style="border-color: #00ff00;">SCANNING...</div>`;
-            setTimeout(() => {
-                details.innerHTML = `<div class="spec-item"><strong>Module:</strong> ${title}</div>
-                                     <div class="spec-item"><strong>Status:</strong> Active</div>`;
-            }, 400);
-        }
-
-        // AI Simulation Logic
-        function simulateAIScan() {
-            const status = document.getElementById('ai-status');
-            const items = ['Apple', 'Mobile Device', 'LED TV', 'Processor'];
-            const pick = items[Math.floor(Math.random() * items.length)];
-            status.innerText = "NEURAL NETWORK: SCANNING PIXELS...";
-            setTimeout(() => {
-                status.innerText = "OBJECT FOUND: " + pick;
-                showInfo("AI Identify: " + pick, "Successfully recognized object using Computer Vision patterns.");
-            }, 1500);
-        }
-
-        // Lens Movement
-        const area = document.getElementById('scanArea');
-        const lens = document.getElementById('lens');
-        area.onmousemove = (e) => {
-            const rect = area.getBoundingClientRect();
-            lens.style.left = (e.clientX - rect.left - 50) + 'px';
-            lens.style.top = (e.clientY - rect.top - 50) + 'px';
         };
+
+        function processImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                // Update Image
+                document.getElementById('scanPreview').src = reader.result;
+                
+                // Start Scanning Logic
+                document.getElementById('waiting-msg').innerText = "AI SCANNING PIXELS...";
+                document.getElementById('result-area').style.display = "none";
+
+                setTimeout(() => {
+                    // Logic to simulate finding an object (defaulting to apple for this example)
+                    // In a real app, you'd use a TensorFlow.js model here.
+                    displayStudyContent("apple"); 
+                }, 2000);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function displayStudyContent(key) {
+            const data = studyData[key];
+            
+            document.getElementById('waiting-msg').style.display = "none";
+            document.getElementById('result-area').style.display = "block";
+            
+            // STEP 2: Content
+            document.getElementById('step2-title').innerText = "STEP 2: " + data.name;
+            document.getElementById('step2-desc').innerText = data.desc;
+            
+            // STEP 3: Pros/Cons
+            document.getElementById('pro-text').innerHTML = "<strong>ADVANTAGE:</strong><br>" + data.pro;
+            document.getElementById('con-text').innerHTML = "<strong>DISADVANTAGE:</strong><br>" + data.con;
+            
+            // STEP 4: Bio Status
+            const statusBox = document.getElementById('step4-status');
+            statusBox.innerText = data.type;
+            statusBox.style.color = (data.type === "BIODEGRADABLE") ? "#00ff00" : "#ff4444";
+            statusBox.style.borderColor = (data.type === "BIODEGRADABLE") ? "#00ff00" : "#ff4444";
+        }
     </script>
 </body>
 </html>
