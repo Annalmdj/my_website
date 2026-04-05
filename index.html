@@ -3,132 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eagle X | Waste AI Portal</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Eagle X | Universal AI Study Portal</title>
+    <style>
+        /* --- THEME & LAYOUT --- */
+        body { background: #0d0d0d; color: #eee; font-family: sans-serif; margin: 0; text-align: center; }
+        .navbar { background: #151515; padding: 15px; border-bottom: 2px solid #00d4ff; display: flex; justify-content: space-around; }
+        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 40px; }
+        
+        /* --- SCANNER BOX --- */
+        .scan-box { background: #1a1a1a; border: 1px solid #333; border-radius: 15px; padding: 20px; width: 400px; position: relative; }
+        .scan-img { width: 100%; border-radius: 10px; border: 1px solid #444; }
+        .scan-line { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 4px; 
+            background: #00d4ff; box-shadow: 0 0 15px #00d4ff; 
+            animation: scanAnim 3s infinite linear; display: none;
+        }
+        @keyframes scanAnim { 0% { top: 10%; } 100% { top: 90%; } }
+
+        /* --- DASHBOARD --- */
+        .dashboard { background: #111; border-radius: 15px; padding: 25px; width: 450px; text-align: left; border: 1px solid #00d4ff; }
+        .spec-item { background: #222; padding: 12px; border-left: 4px solid #00d4ff; margin: 10px 0; font-size: 14px; }
+        .btn-upload { background: #00d4ff; color: #000; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 15px; }
+    </style>
 </head>
 <body>
 
-    <div id="devModal" class="modal">
-        <div class="modal-content">
-            <h2 style="color: #00d4ff;">Eagle X Portal</h2>
-            <p><strong>Developer:</strong> Annal Mohammed J</p>
-            <p><strong>Project:</strong> Waste AI Study</p>
-            <hr style="border: 0.5px solid #333; margin: 15px 0;">
-            <button onclick="document.getElementById('devModal').style.display='none'" class="btn-action">Start Study</button>
+    <nav class="navbar">
+        <div style="font-size: 20px; font-weight: bold;">StudentPortal</div>
+        <div>Home | Waste AI | Contact</div>
+    </nav>
+
+    <h2>Eagle X: Universal Object Scanner</h2>
+
+    <div class="container">
+        <div class="scan-box">
+            <div id="line" class="scan-line"></div>
+            <img src="https://via.placeholder.com/400x300?text=Upload+to+Start" id="previewImg" class="scan-img">
+            <input type="file" id="fileSelector" onchange="initiateScan(event)" hidden>
+            <button class="btn-upload" onclick="document.getElementById('fileSelector').click()">STEP 1: UPLOAD IMAGE</button>
+        </div>
+
+        <div class="dashboard">
+            <h3 id="res-name" style="color:#00d4ff;">Step 2: Waiting for Scan...</h3>
+            <p id="res-desc" style="color:#999; font-size: 13px;"></p>
+            
+            <div id="details-ui" style="display:none;">
+                <h4 style="color:#00ff00;">Step 3: Advantages & Disadvantages</h4>
+                <div class="spec-item" id="res-pro" style="border-color:#00ff00;"></div>
+                <div class="spec-item" id="res-con" style="border-color:#ff4444;"></div>
+                
+                <h4 style="color:#00d4ff;">Step 4: Classification</h4>
+                <div class="spec-item" id="res-class" style="text-align:center; font-weight:bold; font-size:18px;"></div>
+            </div>
+            
+            <div id="status-msg" style="text-align:center; color:#555;">Ready to analyze your file.</div>
         </div>
     </div>
 
-    <nav class="navbar">
-        <div style="font-size: 22px; font-weight: bold; color: #00d4ff;">Student<span>Portal</span></div>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#waste-module">Waste AI</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
-
-    <header>
-        <img src="EagleX.jpeg" alt="Logo" class="logo">
-        <h1>Eagle X: Visual AI</h1>
-        <p>Step-by-Step Waste Classification Study</p>
-    </header>
-
-    <section id="waste-module" class="product-study">
-        <div class="container">
-            <div class="product-visual">
-                <img src="https://via.placeholder.com/350x250?text=Upload+Image" id="scanPreview" alt="Scanner Area">
-                <input type="file" id="fileInput" onchange="processImage(event)" hidden>
-                <button class="btn-action" style="position:absolute; bottom:10px; left:10%; width:80%;" onclick="document.getElementById('fileInput').click()">
-                    STEP 1: UPLOAD IMAGE
-                </button>
-            </div>
-
-            <div class="scanner-dashboard">
-                <span style="color:#00d4ff; font-size:11px; font-weight:bold;">AI ANALYSIS ENGINE</span>
-                <h2 id="step2-title">Identification Ready</h2>
-                <hr style="border:0.5px solid #333;">
-                
-                <div id="result-area" style="display:none;">
-                    <p id="step2-desc" style="font-size:13px; color:#bbb;"></p>
-                    
-                    <h4 style="color:#00ff00; margin-bottom:5px;">Step 3: Pros & Cons</h4>
-                    <div class="spec-grid">
-                        <div class="spec-item" id="pro-text" style="border-color:#00ff00;"></div>
-                        <div class="spec-item" id="con-text" style="border-color:#ff4444;"></div>
-                    </div>
-
-                    <h4 style="color:#00d4ff; margin-bottom:5px;">Step 4: Classification</h4>
-                    <div class="spec-item" id="step4-status" style="font-weight:bold; text-align:center;"></div>
-                </div>
-
-                <div id="waiting-msg" style="color:#666; font-style:italic; margin-top:20px;">
-                    Please upload an image (Apple, Plastic, etc.) to begin Step 2.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer style="margin: 50px 0; font-size: 12px; color: #555;">
-        <p>&copy; 2026 Eagle X | Designed by Annal Mohammed J</p>
-    </footer>
+    <footer style="margin-top:50px; color:#444;">&copy; 2026 Eagle X | Designed by Annal Mohammed J</footer>
 
     <script>
-        // Database of objects for study
-        const studyData = {
-            "apple": {
-                name: "Organic Waste (Apple)",
-                desc: "Natural matter derived from fruits. Contains moisture and fiber.",
-                pro: "Completely natural; can be composted into fertilizer.",
-                con: "Decays quickly; can attract pests if left open.",
-                type: "BIODEGRADABLE"
-            },
-            "plastic": {
-                name: "Synthetic Waste (Plastic)",
-                desc: "Man-made polymer used in packaging and bottles.",
-                pro: "Highly durable, waterproof, and very cheap to make.",
-                con: "Does not decay; creates microplastic pollution.",
-                type: "NON-BIODEGRADABLE"
-            }
-        };
+        // UNIVERSAL STUDY DATABASE
+        const database = [
+            { keys: ["apple", "mango", "fruit", "vegetable", "tomato", "carrot"], name: "Organic Material", desc: "Natural biological matter from plants.", pro: "Compostable & Eco-friendly.", con: "Quickly decays; attracts pests.", type: "BIODEGRADABLE" },
+            { keys: ["bottle", "plastic", "cup", "toy", "nylon"], name: "Synthetic Plastic", desc: "Man-made polymer from petroleum.", pro: "Cheap & Waterproof.", con: "High pollution; non-decaying.", type: "NON-BIODEGRADABLE" },
+            { keys: ["iphone", "samsung", "mobile", "phone", "pixel"], name: "Electronic Device (Mobile)", desc: "Complex communication hardware.", pro: "Global connectivity & Speed.", con: "Toxic E-waste if discarded.", type: "NON-BIODEGRADABLE" },
+            { keys: ["laptop", "dell", "hp", "computer", "macbook"], name: "Computing Hardware", desc: "Advanced processing workstation.", pro: "High productivity/Education.", con: "High power use; fragile.", type: "NON-BIODEGRADABLE" },
+            { keys: ["dress", "shirt", "pant", "nike", "cotton"], name: "Textile Apparel", desc: "Fabric garments for protection.", pro: "Comfortable & Stylish.", con: "Microfiber water pollution.", type: "VARIES (Check Fabric)" },
+            { keys: ["wood", "tree", "paper", "pencil", "table"], name: "Timber/Cellulose", desc: "Wood-based material from trees.", pro: "Strong & Renewable resource.", con: "Flammable; leads to deforestation.", type: "BIODEGRADABLE" },
+            { keys: ["pen"], name: "Writing Instrument (Plastic)", desc: "Synthetic tool for documentation.", pro: "Cheap & Portable.", con: "Single-use plastic waste.", type: "NON-BIODEGRADABLE" }
+        ];
 
-        function processImage(event) {
+        function initiateScan(event) {
+            const file = event.target.files[0];
+            const fileName = file.name.toLowerCase();
             const reader = new FileReader();
+
             reader.onload = function() {
-                // Update Image
-                document.getElementById('scanPreview').src = reader.result;
-                
-                // Start Scanning Logic
-                document.getElementById('waiting-msg').innerText = "AI SCANNING PIXELS...";
-                document.getElementById('result-area').style.display = "none";
+                // Update UI for Scanning
+                document.getElementById('previewImg').src = reader.result;
+                document.getElementById('line').style.display = "block";
+                document.getElementById('status-msg').innerText = "AI RECOGNIZING OBJECT...";
+                document.getElementById('details-ui').style.display = "none";
+                document.getElementById('res-name').innerText = "Analyzing...";
 
                 setTimeout(() => {
-                    // Logic to simulate finding an object (defaulting to apple for this example)
-                    // In a real app, you'd use a TensorFlow.js model here.
-                    displayStudyContent("apple"); 
-                }, 2000);
+                    performLookup(fileName);
+                    document.getElementById('line').style.display = "none";
+                }, 2500);
             };
-            reader.readAsDataURL(event.target.files[0]);
+            reader.readAsDataURL(file);
         }
 
-        function displayStudyContent(key) {
-            const data = studyData[key];
-            
-            document.getElementById('waiting-msg').style.display = "none";
-            document.getElementById('result-area').style.display = "block";
-            
-            // STEP 2: Content
-            document.getElementById('step2-title').innerText = "STEP 2: " + data.name;
-            document.getElementById('step2-desc').innerText = data.desc;
-            
-            // STEP 3: Pros/Cons
-            document.getElementById('pro-text').innerHTML = "<strong>ADVANTAGE:</strong><br>" + data.pro;
-            document.getElementById('con-text').innerHTML = "<strong>DISADVANTAGE:</strong><br>" + data.con;
-            
-            // STEP 4: Bio Status
-            const statusBox = document.getElementById('step4-status');
-            statusBox.innerText = data.type;
-            statusBox.style.color = (data.type === "BIODEGRADABLE") ? "#00ff00" : "#ff4444";
-            statusBox.style.borderColor = (data.type === "BIODEGRADABLE") ? "#00ff00" : "#ff4444";
+        function performLookup(fileName) {
+            // Check for match in database
+            const match = database.find(item => item.keys.some(k => fileName.includes(k)));
+
+            if (match) {
+                document.getElementById('details-ui').style.display = "block";
+                document.getElementById('status-msg').style.display = "none";
+                
+                // Fill Data
+                document.getElementById('res-name').innerText = "STEP 2: " + match.name;
+                document.getElementById('res-desc').innerText = match.desc;
+                document.getElementById('res-pro').innerHTML = "<strong>PRO:</strong> " + match.pro;
+                document.getElementById('res-con').innerHTML = "<strong>CON:</strong> " + match.con;
+                
+                const cBox = document.getElementById('res-class');
+                cBox.innerText = match.type;
+                cBox.style.color = (match.type === "BIODEGRADABLE") ? "#00ff00" : "#ff4444";
+                cBox.style.borderColor = (match.type === "BIODEGRADABLE") ? "#00ff00" : "#ff4444";
+            } else {
+                document.getElementById('res-name').innerText = "OBJECT NOT RECOGNIZED";
+                document.getElementById('status-msg').innerText = "Error: Rename file to include object name (e.g., 'blue_bottle.jpg')";
+            }
         }
     </script>
 </body>
